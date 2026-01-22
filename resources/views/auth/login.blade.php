@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Affillink</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1E3A5F 0%, #4CAF50 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+            border-color: #4CAF50;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .eye-icon {
+            cursor: pointer;
+            color: #999;
+        }
+
+        .eye-icon:hover {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Card -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 md:p-10">
+            <!-- Logo & Header -->
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-12 h-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 32h6v-8h12v8h6V16L20 6l-12 10v16z" fill="#1E3A5F"/>
+                        <path d="M20 8l8 6v2h-16v-2l8-6z" fill="#4CAF50"/>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Affillink</h1>
+                <p class="text-gray-600 text-sm">Welcome Back!</p>
+                <p class="text-gray-500 text-xs">Please log in to your account</p>
+            </div>
+
+            <!-- Form -->
+            <form id="loginForm" class="space-y-5">
+                @csrf
+
+                <!-- Email Input -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" 
+                            class="input-focus w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg transition focus:outline-none"
+                            required>
+                    </div>
+                    <span class="error-email text-red-500 text-sm mt-1 hidden"></span>
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                        Password
+                    </label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <input type="password" id="password" name="password" placeholder="••••••••" 
+                            class="input-focus w-full pl-12 pr-12 py-3 border-2 border-gray-200 rounded-lg transition focus:outline-none"
+                            required>
+                        <button type="button" class="eye-icon absolute inset-y-0 right-0 pr-4 flex items-center" onclick="togglePassword()">
+                            <svg class="toggle-eye-icon w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm4-4H7V4h12v14z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="error-password text-red-500 text-sm mt-1 hidden"></span>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center cursor-pointer group">
+                        <input type="checkbox" name="remember" class="w-4 h-4 rounded border-gray-300 accent-green-500">
+                        <span class="ml-2 text-sm text-gray-700 group-hover:text-gray-900">Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm text-gray-600 hover:text-green-600 transition font-medium">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary w-full py-3 rounded-lg text-white font-semibold text-lg mt-6 transition">
+                    Log In
+                </button>
+            </form>
+
+            <!-- Sign Up Link -->
+            <p class="text-center text-gray-600 text-sm mt-6">
+                Don't have an account? 
+                <a href="{{ route('auth.register') }}" class="text-green-600 hover:text-green-700 font-semibold transition">
+                    Sign Up
+                </a>
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-gray-300 text-xs mt-8">
+            © 2024 Affillink. All rights reserved.
+        </p>
+    </div>
+
+    <script>
+        const togglePassword = () => {
+            const passwordInput = document.getElementById('password');
+            const toggleEyeIcon = document.querySelector('.toggle-eye-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleEyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+            } else {
+                passwordInput.type = 'password';
+                toggleEyeIcon.innerHTML = '<path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm4-4H7V4h12v14z"/>';
+            }
+        };
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store token
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    // Redirect to dashboard
+                    window.location.href = '/dashboard';
+                } else {
+                    // Show error
+                    if (data.errors) {
+                        Object.keys(data.errors).forEach(field => {
+                            const errorElement = document.querySelector(`.error-${field}`);
+                            if (errorElement) {
+                                errorElement.textContent = data.errors[field][0];
+                                errorElement.classList.remove('hidden');
+                            }
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        });
+
+        // Clear error messages when user starts typing
+        document.getElementById('email').addEventListener('input', () => {
+            document.querySelector('.error-email').classList.add('hidden');
+        });
+
+        document.getElementById('password').addEventListener('input', () => {
+            document.querySelector('.error-password').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
