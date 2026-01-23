@@ -123,36 +123,37 @@
 </style>
 
 <script>
-    // Menu items per role
+    // Menu items per role with tabs support
     const menuByRole = {
         'super-admin': [
-            { label: 'Dashboard', url: '#', icon: 'dashboard', active: true },
-            { label: 'Users', url: '#', icon: 'users' },
-            { label: 'Affiliates', url: '#', icon: 'affiliates' },
-            { label: 'Campaigns', url: '#', icon: 'campaigns' },
-            { label: 'Finances', url: '#', icon: 'finances' },
-            { label: 'Payouts', url: '#', icon: 'payouts' }
+            { label: 'Dashboard', url: '/dashboard', icon: 'dashboard', active: true, tab: 'overview' },
+            { label: 'Analytics', url: '#', icon: 'reports', tab: 'analytics' },
+            { label: 'Users', url: '#', icon: 'users', tab: 'users' },
+            { label: 'Affiliates', url: '#', icon: 'affiliates', tab: 'affiliates' },
+            { label: 'Campaigns', url: '#', icon: 'campaigns', tab: 'campaigns' },
+            { label: 'Finances', url: '#', icon: 'finances', tab: 'finances' },
+            { label: 'Payouts', url: '#', icon: 'payouts', tab: 'payouts' }
         ],
         'sales': [
-            { label: 'Dashboard', url: '#', icon: 'dashboard', active: true },
-            { label: 'Leads', url: '#', icon: 'leads' },
-            { label: 'Sales', url: '#', icon: 'sales' },
-            { label: 'Performance', url: '#', icon: 'performance' },
-            { label: 'Reports', url: '#', icon: 'reports' }
+            { label: 'Dashboard', url: '/dashboard', icon: 'dashboard', active: true, tab: 'overview' },
+            { label: 'Leads', url: '#', icon: 'leads', tab: 'leads' },
+            { label: 'Sales', url: '#', icon: 'sales', tab: 'sales' },
+            { label: 'Performance', url: '#', icon: 'performance', tab: 'performance' },
+            { label: 'Reports', url: '#', icon: 'reports', tab: 'reports' }
         ],
         'affiliate': [
-            { label: 'Dashboard', url: '#', icon: 'dashboard', active: true },
-            { label: 'Reports', url: '#', icon: 'reports' },
-            { label: 'Campaigns', url: '#', icon: 'campaigns' },
-            { label: 'Payouts', url: '#', icon: 'payouts' },
-            { label: 'Support', url: '#', icon: 'support' }
+            { label: 'Dashboard', url: '/dashboard', icon: 'dashboard', active: true, tab: 'overview' },
+            { label: 'Reports', url: '#', icon: 'reports', tab: 'reports' },
+            { label: 'Campaigns', url: '#', icon: 'campaigns', tab: 'campaigns' },
+            { label: 'Payouts', url: '#', icon: 'payouts', tab: 'payouts' },
+            { label: 'Support', url: '#', icon: 'support', tab: 'support' }
         ],
         'finance': [
-            { label: 'Dashboard', url: '#', icon: 'dashboard', active: true },
-            { label: 'Transactions', url: '#', icon: 'sales' },
-            { label: 'Invoices', url: '#', icon: 'payouts' },
-            { label: 'Reports', url: '#', icon: 'reports' },
-            { label: 'Support', url: '#', icon: 'support' }
+            { label: 'Dashboard', url: '/dashboard', icon: 'dashboard', active: true, tab: 'overview' },
+            { label: 'Transactions', url: '#', icon: 'sales', tab: 'transactions' },
+            { label: 'Invoices', url: '#', icon: 'payouts', tab: 'invoices' },
+            { label: 'Reports', url: '#', icon: 'reports', tab: 'reports' },
+            { label: 'Support', url: '#', icon: 'support', tab: 'support' }
         ]
     };
 
@@ -199,16 +200,20 @@
         setupMobileMenu();
     }
 
-    // Render menu items
+    // Render menu items with tab support
     function renderMenu(items) {
         const menuContainer = document.getElementById('sidebarMenu');
         menuContainer.innerHTML = items.map((item, index) => {
             const isActive = index === 0;
             const bgColor = isActive ? 'bg-green-500 hover:bg-green-600 shadow-lg' : 'hover:bg-white hover:bg-opacity-10';
             const textColor = 'text-white';
+            const tabAttr = item.tab ? `data-tab="${item.tab}"` : '';
 
             return `
-                <a href="${item.url}" class="menu-item flex items-center space-x-2.5 px-3 py-2.5 ${bgColor} ${textColor} rounded-lg transition-all duration-200 text-sm font-medium ${isActive ? 'active' : ''} group">
+                <a href="${item.url}" 
+                   class="menu-item flex items-center space-x-2.5 px-3 py-2.5 ${bgColor} ${textColor} rounded-lg transition-all duration-200 text-sm font-medium ${isActive ? 'active' : ''} group"
+                   ${tabAttr}
+                   onclick="handleMenuClick(event, '${item.tab || ''}')">
                     <svg class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="${iconPaths[item.icon]}" clip-rule="evenodd"></path>
                     </svg>
@@ -217,6 +222,17 @@
                 </a>
             `;
         }).join('');
+    }
+
+    // Handle menu clicks with tab functionality
+    function handleMenuClick(event, tab) {
+        // Store active tab in sessionStorage
+        if (tab) {
+            sessionStorage.setItem('activeTab', tab);
+        }
+        
+        // You can add custom tab switching logic here
+        console.log('Menu clicked, tab:', tab);
     }
 
     // Setup mobile menu functionality

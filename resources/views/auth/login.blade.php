@@ -163,7 +163,7 @@
             const password = document.getElementById('password').value;
             
             try {
-                const response = await fetch('/api/login', {
+                const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -179,8 +179,21 @@
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     
-                    // Redirect to dashboard
-                    window.location.href = '/dashboard';
+                    // Redirect to dashboard based on role
+                    const role = data.user.role;
+                    let redirectUrl = '/dashboard';
+                    
+                    if (role === 'super-admin' || role === 'admin') {
+                        redirectUrl = '/dashboard/superadmin';
+                    } else if (role === 'sales') {
+                        redirectUrl = '/dashboard/sales';
+                    } else if (role === 'affiliate') {
+                        redirectUrl = '/dashboard/affiliate';
+                    } else if (role === 'finance') {
+                        redirectUrl = '/dashboard/finance';
+                    }
+                    
+                    window.location.href = redirectUrl;
                 } else {
                     // Show error
                     if (data.errors) {
