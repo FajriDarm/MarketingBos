@@ -14,9 +14,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('auth.register');
 });
 
-// Dashboard (Protected)
-Route::middleware('auth:api')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Dashboard (Public route - JavaScript will handle auth verification)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

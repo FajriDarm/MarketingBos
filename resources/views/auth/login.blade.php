@@ -57,13 +57,9 @@
         <div class="glass-effect rounded-2xl shadow-2xl p-8 md:p-10">
             <!-- Logo & Header -->
             <div class="text-center mb-8">
-                <div class="flex justify-center mb-4">
-                    <svg class="w-12 h-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 32h6v-8h12v8h6V16L20 6l-12 10v16z" fill="#1E3A5F"/>
-                        <path d="M20 8l8 6v2h-16v-2l8-6z" fill="#4CAF50"/>
-                    </svg>
+                <div class="flex justify-center mb-1">
+                    <img src="{{ asset('images/logoAffilllink2.png') }}" alt="Affillink Logo" class="w-52 h-auto object-contain">
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Affillink</h1>
                 <p class="text-gray-600 text-sm">Welcome Back!</p>
                 <p class="text-gray-500 text-xs">Please log in to your account</p>
             </div>

@@ -87,12 +87,8 @@
             <!-- Logo & Header -->
             <div class="text-center mb-8">
                 <div class="flex justify-center mb-4">
-                    <svg class="w-12 h-12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 32h6v-8h12v8h6V16L20 6l-12 10v16z" fill="#1E3A5F"/>
-                        <path d="M20 8l8 6v2h-16v-2l8-6z" fill="#4CAF50"/>
-                    </svg>
+                    <img src="{{ asset('images/logoAffilllink2.png') }}" alt="Affillink Logo" class="w-52 h-auto object-contain">
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Affillink</h1>
                 <p class="text-gray-600 text-sm">Join Our Affiliate Network</p>
                 <p class="text-gray-500 text-xs">Create your account and start earning</p>
             </div>
@@ -296,12 +292,11 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Store token
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
+                    // Show success message
+                    alert('Registration successful! Please login with your credentials.');
                     
-                    // Redirect to dashboard
-                    window.location.href = '/dashboard';
+                    // Redirect to login page
+                    window.location.href = '/login';
                 } else {
                     // Show errors
                     if (data.errors) {

@@ -15,193 +15,176 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-8">
-                    <h1 class="text-2xl font-bold text-gray-800">Affillink</h1>
-                    <div class="hidden md:flex space-x-4">
-                        <a href="#" class="text-gray-600 hover:text-gray-900 transition">Dashboard</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900 transition">Affiliates</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-900 transition">Reports</a>
+    <!-- Include Dynamic Sidebar -->
+    @include('components.sidebar')
+
+    <!-- Main Content with responsive padding -->
+    <main class="min-h-screen lg:ml-64 p-4 md:p-6 lg:p-8 transition-all duration-300">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900">Dashboard</h1>
+                <p class="text-gray-600 mt-2">Selamat datang di Affillink Dashboard</p>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Earnings</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">$5,472.50</p>
+                            <p class="text-green-600 text-xs mt-2">↑ 12% from last month</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5z"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="hidden md:block">
-                        <p id="userNameDisplay" class="text-gray-700 font-medium"></p>
-                        <p class="text-gray-500 text-sm" id="userEmailDisplay"></p>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Clicks</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">12,980</p>
+                            <p class="text-green-600 text-xs mt-2">↑ 8% from last month</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7z"></path>
+                            </svg>
+                        </div>
                     </div>
-                    <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
-                        Logout
-                    </button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Conversion Rate</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">3.8%</p>
+                            <p class="text-green-600 text-xs mt-2">↑ 0.5% from last month</p>
+                        </div>
+                        <div class="bg-cyan-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-cyan-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Sales</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">495</p>
+                            <p class="text-green-600 text-xs mt-2">↑ 5% from last month</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Chart 1 -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Performance Overview</h3>
+                    <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">
+                        [Chart Area - Integrate Chart.js or ApexCharts]
+                    </div>
+                </div>
+
+                <!-- Chart 2 -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Commission Breakdown</h3>
+                    <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">
+                        [Donut Chart Area]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-4">Recent Activities</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-left py-3 px-4 text-gray-600 font-medium">Type</th>
+                                <th class="text-left py-3 px-4 text-gray-600 font-medium">Amount</th>
+                                <th class="text-left py-3 px-4 text-gray-600 font-medium">Status</th>
+                                <th class="text-left py-3 px-4 text-gray-600 font-medium">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">Commission</td>
+                                <td class="py-3 px-4 font-medium">$250.00</td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">Paid</span>
+                                </td>
+                                <td class="py-3 px-4 text-gray-600">Jan 20, 2026</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">Sale</td>
+                                <td class="py-3 px-4 font-medium">$150.00</td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">Completed</span>
+                                </td>
+                                <td class="py-3 px-4 text-gray-600">Jan 19, 2026</td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">Payout</td>
+                                <td class="py-3 px-4 font-medium">$500.00</td>
+                                <td class="py-3 px-4">
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium">Pending</span>
+                                </td>
+                                <td class="py-3 px-4 text-gray-600">Jan 18, 2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome to Affillink Dashboard</h2>
-            <p class="text-gray-600">Manage your affiliate account and track your earnings</p>
-        </div>
-
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Total Commission -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-600 font-medium">Total Commission</h3>
-                    <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M8.16 2.75a.75.75 0 00-.75.75v8.5h-3a.75.75 0 000 1.5h3v3a.75.75 0 001.5 0v-3h3a.75.75 0 000-1.5h-3V3.5a.75.75 0 00-.75-.75zM15 3.75a.75.75 0 011.5 0v12.5a.75.75 0 01-1.5 0V3.75z"></path>
-                    </svg>
-                </div>
-                <p class="text-2xl font-bold text-gray-900" id="totalCommission">Rp 0</p>
-                <p class="text-gray-500 text-sm mt-2">Lifetime earnings</p>
-            </div>
-
-            <!-- Total Withdrawn -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-600 font-medium">Total Withdrawn</h3>
-                    <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10.5 1.5H5.75A2.75 2.75 0 003 4.25v11a2.75 2.75 0 002.75 2.75h8.5a2.75 2.75 0 002.75-2.75v-8.5m.75-5.75h-2.5m0 0l.75-.75m-.75.75l-.75.75"></path>
-                    </svg>
-                </div>
-                <p class="text-2xl font-bold text-gray-900" id="totalWithdrawn">Rp 0</p>
-                <p class="text-gray-500 text-sm mt-2">Amount withdrawn</p>
-            </div>
-
-            <!-- Active Links -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-600 font-medium">Active Links</h3>
-                    <svg class="w-8 h-8 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM9.172 9.172a2 2 0 012.828 0l.793.793 2.828-2.828-.793-.793a4 4 0 00-5.656 0l-.828.828-2.828-2.828.828-.828a6 6 0 018.485 0l.828.828 2.828-2.828-.828-.828a8 8 0 00-11.314 0l-.828.828L1.172 2.172a2 2 0 112.828 2.828l2.828 2.828.172-.172a4 4 0 015.656 0l2.828 2.828.172.172-2.828 2.828z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <p class="text-2xl font-bold text-gray-900" id="activeLinks">0</p>
-                <p class="text-gray-500 text-sm mt-2">Active affiliate links</p>
-            </div>
-        </div>
-
-        <!-- Recent Activity -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h3 class="text-lg font-bold text-gray-900 mb-4">Account Information</h3>
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="text-left py-3 px-4 text-gray-600 font-medium">Field</th>
-                            <th class="text-left py-3 px-4 text-gray-600 font-medium">Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4 text-gray-700">Name</td>
-                            <td class="py-3 px-4 text-gray-900 font-medium" id="displayName">-</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4 text-gray-700">Email</td>
-                            <td class="py-3 px-4 text-gray-900 font-medium" id="displayEmail">-</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4 text-gray-700">Role</td>
-                            <td class="py-3 px-4 text-gray-900 font-medium" id="displayRole">-</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4 text-gray-700">Commission Rate</td>
-                            <td class="py-3 px-4 text-gray-900 font-medium" id="displayCommissionRate">-</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="py-3 px-4 text-gray-700">Account Status</td>
-                            <td class="py-3 px-4"><span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Active</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <script>
-        // Load user data from localStorage
-        function loadUserData() {
-            const user = JSON.parse(localStorage.getItem('user'));
+        // Verify user is logged in
+        window.addEventListener('load', () => {
             const token = localStorage.getItem('token');
-
-            if (!user || !token) {
+            const user = localStorage.getItem('user');
+            
+            if (!token || !user) {
                 window.location.href = '/login';
-                return;
             }
-
-            // Display user information
-            document.getElementById('userNameDisplay').textContent = user.name;
-            document.getElementById('userEmailDisplay').textContent = user.email;
-            document.getElementById('displayName').textContent = user.name;
-            document.getElementById('displayEmail').textContent = user.email;
-            document.getElementById('displayRole').textContent = user.role || 'Affiliate';
-            document.getElementById('displayCommissionRate').textContent = (user.commission_rate || 0) + '%';
-
-            // Fetch additional user data from API
-            fetchUserData();
-        }
-
-        // Fetch user data from API
-        async function fetchUserData() {
-            const token = localStorage.getItem('token');
-
-            try {
-                const response = await fetch('/api/me', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    const user = data.user;
-                    document.getElementById('totalCommission').textContent = 'Rp ' + (user.total_commission || 0).toLocaleString('id-ID');
-                    document.getElementById('totalWithdrawn').textContent = 'Rp ' + (user.total_withdrawn || 0).toLocaleString('id-ID');
-                } else {
-                    console.error('Failed to fetch user data');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
+        });
 
         // Logout function
         async function logout() {
-            if (!confirm('Are you sure you want to logout?')) return;
-
+            if (!confirm('Yakin ingin logout?')) return;
             const token = localStorage.getItem('token');
-
             try {
-                const response = await fetch('/api/logout', {
+                await fetch('/api/logout', {
                     method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
-
-                if (response.ok) {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
-                    window.location.href = '/login';
-                }
             } catch (error) {
                 console.error('Error:', error);
-                // Still logout on error
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                window.location.href = '/login';
             }
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
         }
-
-        // Load user data on page load
-        loadUserData();
     </script>
 </body>
 </html>
