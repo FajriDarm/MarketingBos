@@ -4,699 +4,1142 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Affillink - Affiliate Marketing Platform</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom Font -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: '#059669',
-                            dark: '#047857',
-                            light: '#10b981'
-                        },
-                        secondary: {
-                            DEFAULT: '#3b82f6',
-                            dark: '#2563eb'
-                        },
-                        dark: '#1e293b',
-                        gray: {
-                            dark: '#475569',
-                            DEFAULT: '#64748b',
-                            light: '#e2e8f0'
-                        },
-                        light: '#f8fafc'
-                    },
-                    fontFamily: {
-                        sans: ['Instrument Sans', 'system-ui', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'primary': '0 10px 30px rgba(5, 150, 105, 0.2)',
-                        'card': '0 10px 25px rgba(0, 0, 0, 0.05)',
-                        'card-lg': '0 20px 40px rgba(0, 0, 0, 0.1)'
-                    },
-                    borderRadius: {
-                        'lg': '12px',
-                        'xl': '16px',
-                        '2xl': '20px'
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            'from': {
-                                opacity: '0',
-                                transform: 'translateY(30px)'
-                            },
-                            'to': {
-                                opacity: '1',
-                                transform: 'translateY(0)'
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom CSS untuk efek tambahan */
-        .gradient-text {
-            background: linear-gradient(135deg, #1e293b 0%, #059669 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .navbar-scrolled {
-            padding: 12px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #10b981;
+            --secondary: #3b82f6;
+            --secondary-dark: #2563eb;
+            --dark: #1e293b;
+            --gray-dark: #475569;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --shadow-primary: 0 10px 30px rgba(5, 150, 105, 0.2);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s ease;
         }
-        
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        .mobile-menu.active {
-            transform: translateX(0);
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
         }
-        
-        /* Custom scroll padding untuk fixed navbar */
-        html {
-            scroll-padding-top: 80px;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
-        
-        /* Dashboard chart */
-        .chart-line {
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 120 Q 50 100 100 80 T 200 60 T 300 40 T 400 20' stroke='%2310b981' stroke-width='4' fill='none'/%3E%3Ccircle cx='0' cy='120' r='4' fill='%2310b981'/%3E%3Ccircle cx='100' cy='80' r='4' fill='%2310b981'/%3E%3Ccircle cx='200' cy='60' r='4' fill='%2310b981'/%3E%3Ccircle cx='300' cy='40' r='4' fill='%2310b981'/%3E%3Ccircle cx='400' cy='20' r='4' fill='%2310b981'/%3E%3C/svg%3E") no-repeat center;
-            background-size: cover;
+
+        section {
+            padding: 80px 0;
         }
-        
-        /* Hero background effect */
-        .hero-bg {
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0) 70%);
+
+        .section-title {
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            text-align: center;
         }
-        
-        /* CTA background effects */
-        .cta-bg-1 {
-            background: rgba(255, 255, 255, 0.1);
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
         }
-        
-        .cta-bg-2 {
-            background: rgba(255, 255, 255, 0.05);
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            text-align: center;
         }
-        
-        /* Logo placeholder styling */
-        .logo-placeholder {
-            width: 180px;
-            height: 40px;
-            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(5, 150, 105, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(5, 150, 105, 0.05);
+        }
+
+        /* Navigation - Fixed */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            padding: 18px 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .nav-links a {
+            color: var(--gray-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
             font-size: 1.5rem;
-            letter-spacing: 1px;
+            color: var(--dark);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-icons {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .payment-icons span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            padding: 8px 16px;
+            border-radius: 6px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--gray-light);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .dashboard-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid #86efac;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(5, 150, 105, 0.15);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        .chart-area {
+            background: linear-gradient(180deg, #dcfce7 0%, #f0fdf4 100%);
+            height: 200px;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .chart-line {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            height: 120px;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 120 Q 50 100 100 80 T 200 60 T 300 40 T 400 20' stroke='%2310b981' stroke-width='4' fill='none'/%3E%3Ccircle cx='0' cy='120' r='4' fill='%2310b981'/%3E%3Ccircle cx='100' cy='80' r='4' fill='%2310b981'/%3E%3Ccircle cx='200' cy='60' r='4' fill='%2310b981'/%3E%3Ccircle cx='300' cy='40' r='4' fill='%2310b981'/%3E%3Ccircle cx='400' cy='20' r='4' fill='%2310b981'/%3E%3C/svg%3E") no-repeat center;
+            background-size: cover;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-primary);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #dcfce7 0%, #86efac 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 28px;
+            color: var(--primary-dark);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .feature-desc {
+            font-size: 0.9375rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Analytics Section */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .analytics-preview {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--secondary) 100%);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            color: var(--white);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .analytics-preview h3 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .analytics-stats {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 24px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .stat-row span:last-child {
+            font-weight: 700;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-role {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 0.9375rem;
+            color: var(--gray);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .cta::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .cta h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--gray-light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            color: var(--white);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        /* ===========================================
+           RESPONSIVE STYLES
+        =========================================== */
+
+        /* Tablet (max-width: 1024px) */
+        @media (max-width: 1024px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.75rem;
+            }
+            
+            .hero-container,
+            .analytics-grid {
+                gap: 40px;
+            }
+        }
+
+        /* Tablet (max-width: 992px) */
+        @media (max-width: 992px) {
+            .hero-container,
+            .analytics-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .payment-icons {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Tablet (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Navigation Mobile */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 280px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 100px;
+                padding-left: 30px;
+                gap: 25px;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                transition: right 0.3s ease;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.125rem;
+                color: var(--dark);
+            }
+            
+            .nav-links a.btn-primary {
+                margin-top: 20px;
+                width: 80%;
+                text-align: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu-overlay.active {
+                display: block;
+            }
+            
+            /* Hero Section */
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.25rem;
+            }
+            
+            /* Features & Testimonials */
+            .features-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Footer */
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-column {
+                width: 100%;
+            }
+        }
+
+        /* Mobile (max-width: 576px) */
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.875rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p,
+            .section-subtitle,
+            .cta p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9375rem;
+            }
+            
+            .dashboard-preview,
+            .feature-card,
+            .testimonial-card {
+                padding: 20px;
+            }
+            
+            .analytics-preview {
+                padding: 25px;
+            }
+            
+            /* Hide dashboard chart on very small screens */
+            .chart-area {
+                height: 150px;
+            }
+            
+            .payment-icons {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        /* Small Mobile (max-width: 400px) */
+        @media (max-width: 400px) {
+            .hero-content h1 {
+                font-size: 1.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.625rem;
+            }
+            
+            .cta h2 {
+                font-size: 1.75rem;
+            }
+            
+            .feature-card,
+            .testimonial-card {
+                padding: 16px;
+            }
+            
+            .analytics-preview {
+                padding: 20px;
+            }
+            
+            .footer-column h3 {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Landscape Mode */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                padding-top: 100px;
+                padding-bottom: 60px;
+            }
+            
+            .nav-links {
+                padding-top: 80px;
+                gap: 15px;
+            }
+        }
+
+        /* Animation for elements */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        /* Scroll padding untuk fixed navbar */
+        html {
+            scroll-padding-top: 80px;
         }
     </style>
 </head>
-<body class="font-sans bg-light text-dark overflow-x-hidden">
+<body>
     <!-- Mobile Menu Overlay -->
-    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
     <!-- Navigation -->
-    <nav id="mainNav" class="fixed top-0 left-0 right-0 bg-white bg-opacity-98 backdrop-blur-sm shadow-md z-50 py-4 transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <!-- Logo Affillink -->
-                <a href="#" class="flex items-center">
-                    <img src="/images/logoAffilllink2.png" alt="Affillink Logo" class="h-10 w-auto" style="max-width:180px;">
-                </a>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden lg:flex items-center gap-8">
-                    <!-- Main Navigation Links -->
-                    <div class="flex gap-8">
-                        <a href="#home" class="text-gray-dark font-medium hover:text-primary transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Home</a>
-                        <a href="#features" class="text-gray-dark font-medium hover:text-primary transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Features</a>
-                        <a href="#pricing" class="text-gray-dark font-medium hover:text-primary transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Pricing</a>
-                        <a href="#blog" class="text-gray-dark font-medium hover:text-primary transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">Blog</a>
-                    </div>
-                    
-                    <!-- Action Buttons -->
-                    <div class="flex items-center gap-4">
-                        <a href="/login" class="px-6 py-2 border-2 border-gray-light rounded-lg font-medium text-dark hover:border-primary hover:text-primary transition-all duration-300">Login</a>
-                        <a href="/register" class="px-6 py-2 bg-gradient-to-br from-primary to-primary-light text-white font-medium rounded-lg shadow-primary hover:shadow-xl transition-all duration-300 hover:-translate-y-1">Register</a>
-                    </div>
+    <nav id="mainNav">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div>
+                    <img src="/images/logoAffilllink2.png" alt="Affilink Logo" style="height: 40px; width: auto; display: block;" />
                 </div>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="lg:hidden text-2xl text-dark focus:outline-none">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <span style="margin-left: 8px;"></span>
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#blog">Blog</a>
+                <a href="#login">Login</a>
+                <a href="#signup" class="btn btn-primary">Get Started</a>
             </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenuContainer" class="mobile-menu fixed top-0 right-0 w-72 h-full bg-white shadow-2xl z-50 flex flex-col pt-24 px-8 gap-6">
-        <a href="#home" class="text-xl text-dark font-medium hover:text-primary transition-colors">Home</a>
-        <a href="#features" class="text-xl text-dark font-medium hover:text-primary transition-colors">Features</a>
-        <a href="#pricing" class="text-xl text-dark font-medium hover:text-primary transition-colors">Pricing</a>
-        <a href="#blog" class="text-xl text-dark font-medium hover:text-primary transition-colors">Blog</a>
-        
-        <div class="mt-8 flex flex-col gap-4">
-            <a href="/login" class="px-6 py-3 border-2 border-gray-light rounded-lg font-medium text-dark hover:border-primary hover:text-primary transition-all duration-300 text-center">Login</a>
-            <a href="/register" class="px-6 py-3 bg-gradient-to-br from-primary to-primary-light text-white font-medium rounded-lg shadow-primary hover:shadow-xl transition-all duration-300 text-center">Register</a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-16 md:pt-40 md:pb-20 relative overflow-hidden">
-        <!-- Background Effect -->
-        <div class="hero-bg absolute -top-40 -right-40 w-96 h-96 md:w-[800px] md:h-[800px] rounded-full -z-10"></div>
-        
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <!-- Hero Content -->
-                <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text leading-tight">
-                        Grow Your Revenue with Smart Affiliate Marketing
-                    </h1>
-                    <p class="text-lg md:text-xl text-gray mb-8 leading-relaxed">
-                        Join our powerful affiliate platform to boost your income by partnering with top brands and earning commissions easily. Access advanced analytics, intuitive tools, and dedicated support.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
-                        <a href="/login" class="px-8 py-4 bg-gradient-to-br from-primary to-primary-light text-white font-semibold rounded-xl shadow-primary hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                            Get Started
-                        </a>
-                        <a href="/register" class="px-8 py-4 bg-white text-primary font-semibold rounded-xl border-2 border-primary hover:bg-opacity-5 hover:bg-primary transition-all duration-300 text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-                            Learn More
-                        </a>
-                    </div>
-                    
-                    <div class="flex flex-wrap items-center gap-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-                        <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-card text-sm text-gray">
-                            <i class="fab fa-paypal text-primary"></i> PayPal
-                        </span>
-                        <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-card text-sm text-gray">
-                            <i class="fas fa-credit-card text-primary"></i> Stripe
-                        </span>
-                        <span class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-card text-sm text-gray">
-                            <i class="fas fa-university text-primary"></i> Bank Transfer
-                        </span>
-                    </div>
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content animate-fade-in-up">
+                <h1>Grow Your Revenue with Smart Affiliate Marketing</h1>
+                <p>Join our powerful affiliate platform to boost your income by partnering with top brands and earning commissions easily. Access advanced analytics, intuitive tools, and dedicated support.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Get Started Free</a>
+                    <a href="#" class="btn btn-secondary">Watch Demo</a>
                 </div>
-                
-                <!-- Dashboard Preview -->
-                <div class="relative" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
-                    <div class="bg-white rounded-2xl shadow-card-lg border border-gray-light p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-bold text-dark">Affiliate Dashboard</h3>
-                            <span class="text-sm text-gray bg-gray-light px-3 py-1 rounded-full">Last 30 Days</span>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <!-- Stat Card 1 -->
-                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl border border-emerald-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" data-aos="zoom-in" data-aos-delay="100">
-                                <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-2">Total Earnings</p>
-                                <p class="text-2xl md:text-3xl font-bold text-emerald-800">$5,472.50</p>
-                                <p class="text-xs text-primary mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i> 12.5% from last month
-                                </p>
-                            </div>
-                            
-                            <!-- Stat Card 2 -->
-                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl border border-emerald-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" data-aos="zoom-in" data-aos-delay="200">
-                                <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-2">Clicks</p>
-                                <p class="text-2xl md:text-3xl font-bold text-emerald-800">12,980</p>
-                                <p class="text-xs text-primary mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i> 8.2% from last month
-                                </p>
-                            </div>
-                            
-                            <!-- Stat Card 3 -->
-                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-xl border border-emerald-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" data-aos="zoom-in" data-aos-delay="300">
-                                <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-2">Conversion Rate</p>
-                                <p class="text-2xl md:text-3xl font-bold text-emerald-800">3.8%</p>
-                                <p class="text-xs text-primary mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i> 1.2% from last month
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Chart Area -->
-                        <div class="bg-gradient-to-b from-emerald-50 to-green-50 h-48 rounded-xl p-5">
-                            <div class="chart-line absolute bottom-10 left-10 right-10 h-32"></div>
-                        </div>
-                    </div>
+                <div class="payment-icons">
+                    <span><i class="fab fa-paypal"></i> PayPal</span>
+                    <span><i class="fas fa-credit-card"></i> Stripe</span>
+                    <span><i class="fas fa-university"></i> Bank Transfer</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 md:py-20 bg-gray-light">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">
-                Simple, Transparent Pricing
-            </h2>
-            <p class="text-lg md:text-xl text-gray text-center max-w-3xl mx-auto mb-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                Choose a plan that fits your needs. No hidden fees, cancel anytime.
-            </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Starter Plan -->
-                <div class="bg-white rounded-2xl shadow-card p-8 border-2 border-gray-light transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <h3 class="text-xl font-bold text-primary mb-3">Starter</h3>
-                    <div class="text-4xl font-bold text-dark mb-1">Free</div>
-                    <p class="text-gray mb-8">Perfect for getting started</p>
-                    
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Basic analytics</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Unlimited links</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Community support</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="/register" class="block w-full py-3 bg-gradient-to-br from-primary to-primary-light text-white font-semibold rounded-xl text-center shadow-primary hover:shadow-xl transition-all duration-300">
-                        Get Started
-                    </a>
-                </div>
-                
-                <!-- Pro Plan -->
-                <div class="bg-white rounded-2xl shadow-primary p-8 border-2 border-primary relative transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
+            <div class="dashboard-preview animate-fade-in-up">
+                <div class="dashboard-content">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Affiliate Dashboard</div>
+                        <div style="font-size: 14px; color: var(--gray); background: var(--gray-light); padding: 4px 12px; border-radius: 20px;">Last 30 Days</div>
                     </div>
-                    <h3 class="text-xl font-bold text-primary-dark mb-3">Pro</h3>
-                    <div class="text-4xl font-bold text-dark mb-1">$19<span class="text-lg text-gray font-normal">/mo</span></div>
-                    <p class="text-gray mb-8">Best for growing businesses</p>
-                    
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Advanced analytics</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Priority support</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Custom domains</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">API access</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="/register" class="block w-full py-3 bg-gradient-to-br from-primary to-primary-light text-white font-semibold rounded-xl text-center shadow-primary hover:shadow-xl transition-all duration-300">
-                        Start Free Trial
-                    </a>
-                </div>
-                
-                <!-- Enterprise Plan -->
-                <div class="bg-white rounded-2xl shadow-card p-8 border-2 border-gray-light transition-all duration-300 hover:-translate-y-2" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-                    <h3 class="text-xl font-bold text-secondary-dark mb-3">Enterprise</h3>
-                    <div class="text-4xl font-bold text-dark mb-1">Custom</div>
-                    <p class="text-gray mb-8">For large organizations</p>
-                    
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Dedicated manager</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">Custom integrations</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">SLA & onboarding</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-primary mt-1 mr-3"></i>
-                            <span class="text-gray">White-label options</span>
-                        </li>
-                    </ul>
-                    
-                    <a href="#" class="block w-full py-3 bg-white text-primary font-semibold rounded-xl border-2 border-primary hover:bg-opacity-5 hover:bg-primary transition-all duration-300 text-center">
-                        Contact Sales
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-16 md:py-20 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">
-                Latest from Our Blog
-            </h2>
-            <p class="text-lg md:text-xl text-gray text-center max-w-3xl mx-auto mb-12" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                Tips, strategies, and news to help you succeed in affiliate marketing.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Blog Post 1 -->
-                <div class="bg-white rounded-2xl shadow-card p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-card-lg" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="text-sm font-semibold text-primary mb-3">Affiliate Tips</div>
-                    <h3 class="text-xl font-bold text-dark mb-4">5 Ways to Boost Your Affiliate Revenue in 2026</h3>
-                    <p class="text-gray mb-6">Discover actionable strategies to increase your affiliate earnings with proven techniques and expert advice.</p>
-                    <a href="#" class="text-primary font-semibold flex items-center gap-2 hover:text-primary-dark transition-colors">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Blog Post 2 -->
-                <div class="bg-white rounded-2xl shadow-card p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-card-lg" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                    <div class="text-sm font-semibold text-secondary-dark mb-3">Platform Update</div>
-                    <h3 class="text-xl font-bold text-dark mb-4">New Analytics Dashboard Launched</h3>
-                    <p class="text-gray mb-6">Explore the latest features in our analytics dashboard to help you track and optimize your campaigns more effectively.</p>
-                    <a href="#" class="text-primary font-semibold flex items-center gap-2 hover:text-primary-dark transition-colors">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Blog Post 3 -->
-                <div class="bg-white rounded-2xl shadow-card p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-card-lg" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-                    <div class="text-sm font-semibold text-secondary mb-3">Success Story</div>
-                    <h3 class="text-xl font-bold text-dark mb-4">How Jane Grew Her Affiliate Business</h3>
-                    <p class="text-gray mb-6">Read how one marketer scaled her affiliate business using our platform and the lessons you can apply today.</p>
-                    <a href="#" class="text-primary font-semibold flex items-center gap-2 hover:text-primary-dark transition-colors">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Earnings</div>
+                            <div class="stat-value">$5,472.50</div>
+                            <div style="font-size: 12px; color: var(--primary); margin-top: 5px;"><i class="fas fa-arrow-up"></i> 12.5% from last month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Clicks</div>
+                            <div class="stat-value">12,980</div>
+                            <div style="font-size: 12px; color: var(--primary); margin-top: 5px;"><i class="fas fa-arrow-up"></i> 8.2% from last month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Conversion Rate</div>
+                            <div class="stat-value">3.8%</div>
+                            <div style="font-size: 12px; color: var(--primary); margin-top: 5px;"><i class="fas fa-arrow-up"></i> 1.2% from last month</div>
+                        </div>
+                    </div>
+                    <div class="chart-area">
+                        <div class="chart-line"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 md:py-20 bg-light">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">
-                Everything You Need to Succeed
-            </h2>
-            <p class="text-lg md:text-xl text-gray text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                Maximize your earnings with powerful analytics and easy-to-use tools designed for affiliate marketers of all levels.
-            </p>
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Everything You Need to Succeed</h2>
+            <p class="section-subtitle">Maximize your earnings with powerful analytics and easy-to-use tools designed for affiliate marketers of all levels.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <!-- Feature 1 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 border border-gray-light transition-all duration-300 hover:-translate-y-2 hover:shadow-primary hover:border-primary-light" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-50 to-green-100 rounded-xl flex items-center justify-center text-2xl text-primary-dark mb-6 mx-auto">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark text-center mb-4">Real-Time Tracking</h3>
-                    <p class="text-gray text-center">Monitor clicks, conversions, and earnings in real time with our intuitive dashboard and detailed reports.</p>
+                    <h3 class="feature-title">Real-Time Tracking</h3>
+                    <p class="feature-desc">Monitor clicks, conversions, and earnings in real time with our intuitive dashboard and detailed reports.</p>
                 </div>
                 
-                <!-- Feature 2 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 border border-gray-light transition-all duration-300 hover:-translate-y-2 hover:shadow-primary hover:border-primary-light" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-50 to-green-100 rounded-xl flex items-center justify-center text-2xl text-primary-dark mb-6 mx-auto">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-tools"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark text-center mb-4">Marketing Tools</h3>
-                    <p class="text-gray text-center">Access a suite of promotional tools, including banners, links, landing pages, and social media integrations.</p>
+                    <h3 class="feature-title">Marketing Tools</h3>
+                    <p class="feature-desc">Access a suite of promotional tools, including banners, links, landing pages, and social media integrations.</p>
                 </div>
                 
-                <!-- Feature 3 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 border border-gray-light transition-all duration-300 hover:-translate-y-2 hover:shadow-primary hover:border-primary-light" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-50 to-green-100 rounded-xl flex items-center justify-center text-2xl text-primary-dark mb-6 mx-auto">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-money-bill-wave"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark text-center mb-4">Easy Payouts</h3>
-                    <p class="text-gray text-center">Get paid fast with multiple payout options, including PayPal, Stripe, and direct bank transfers.</p>
+                    <h3 class="feature-title">Easy Payouts</h3>
+                    <p class="feature-desc">Get paid fast with multiple payout options, including PayPal, Stripe, and direct bank transfers.</p>
                 </div>
                 
-                <!-- Feature 4 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 border border-gray-light transition-all duration-300 hover:-translate-y-2 hover:shadow-primary hover:border-primary-light" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-50 to-green-100 rounded-xl flex items-center justify-center text-2xl text-primary-dark mb-6 mx-auto">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-dark text-center mb-4">Dedicated Support</h3>
-                    <p class="text-gray text-center">Our expert team is here to assist you 24/7 with any questions, strategy advice, or technical issues.</p>
+                    <h3 class="feature-title">Dedicated Support</h3>
+                    <p class="feature-desc">Our expert team is here to assist you 24/7 with any questions, strategy advice, or technical issues.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Analytics Section -->
-    <section class="py-16 md:py-20 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <!-- Content -->
-                <div data-aos="fade-right" data-aos-duration="800">
-                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Optimize Your Affiliate Performance</h2>
-                    <p class="text-lg text-gray mb-6">
-                        Maximize your earnings with powerful analytics and easy-to-use tools designed to help you track, analyze, and improve your campaigns.
-                    </p>
-                    <p class="text-lg text-gray mb-10">
-                        Track detailed metrics, analyze top-performing campaigns, monitor referral sources, and understand your audience better with our comprehensive dashboard.
-                    </p>
-                    <a href="#" class="px-8 py-4 bg-gradient-to-br from-primary to-primary-light text-white font-semibold rounded-xl shadow-primary hover:shadow-xl transition-all duration-300 hover:-translate-y-1 inline-block" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                        Explore Analytics
-                    </a>
+    <section class="analytics">
+        <div class="container">
+            <div class="analytics-grid">
+                <div class="analytics-content animate-fade-in-up">
+                    <h2 class="section-title" style="text-align: left;">Optimize Your Affiliate Performance</h2>
+                    <p style="margin-bottom: 20px; font-size: 1.125rem;">Maximize your earnings with powerful analytics and easy-to-use tools designed to help you track, analyze, and improve your campaigns.</p>
+                    <p style="margin-bottom: 30px;">Track detailed metrics, analyze top-performing campaigns, monitor referral sources, and understand your audience better with our comprehensive dashboard.</p>
+                    <a href="#" class="btn btn-primary">Explore Analytics</a>
                 </div>
                 
-                <!-- Analytics Preview -->
-                <div class="bg-gradient-to-br from-secondary-dark to-secondary rounded-2xl shadow-card-lg p-8 text-white" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
-                    <h3 class="text-2xl font-bold mb-6">Detailed Earnings Analytics</h3>
-                    
-                    <div class="bg-white bg-opacity-10 rounded-xl p-6 mb-6">
-                        <div class="flex justify-between items-center py-3 border-b border-white border-opacity-10">
+                <div class="analytics-preview animate-fade-in-up">
+                    <h3>Detailed Earnings Analytics</h3>
+                    <div class="analytics-stats">
+                        <div class="stat-row">
                             <span>Total Earnings (All Time)</span>
-                            <span class="font-bold">$2,135,003.00</span>
+                            <span>$2,135,003.00</span>
                         </div>
-                        <div class="flex justify-between items-center py-3 border-b border-white border-opacity-10">
+                        <div class="stat-row">
                             <span>2025-2026 YTD</span>
-                            <span class="font-bold">$1,150,053.00</span>
+                            <span>$1,150,053.00</span>
                         </div>
-                        <div class="flex justify-between items-center py-3">
+                        <div class="stat-row">
                             <span>2024-2025</span>
-                            <span class="font-bold">$985,003.00</span>
+                            <span>$985,003.00</span>
                         </div>
                     </div>
-                    
-                    <p class="text-white text-opacity-90 text-sm">Data updated in real-time. Track your progress and set goals with our advanced analytics.</p>
+                    <p style="opacity: 0.9; font-size: 0.875rem;">Data updated in real-time. Track your progress and set goals with our advanced analytics.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="py-16 md:py-20 bg-light">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">
-                Trusted by Thousands of Affiliates
-            </h2>
-            <p class="text-lg md:text-xl text-gray text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                Join thousands of successful marketers who have increased their earnings with Affilink.
-            </p>
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Trusted by Thousands of Affiliates</h2>
+            <p class="section-subtitle">Join thousands of successful marketers who have increased their earnings with Affilink.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card-lg" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                            JD
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-dark">John Doe</h4>
-                            <p class="text-sm text-gray">Freelance Marketer</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-fade-in-up">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">JD</div>
+                        <div class="testimonial-info">
+                            <h4>John Doe</h4>
+                            <div class="testimonial-role">Freelance Marketer</div>
                         </div>
                     </div>
-                    
-                    <div class="text-yellow-400 mb-4">
+                    <div class="testimonial-stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    
-                    <p class="text-gray italic">
-                        "Affilink has been a game changer for me. The platform is intuitive and my earnings have increased by 65% in just three months. The support team is incredibly responsive."
-                    </p>
+                    <p class="testimonial-text">"Affilink has been a game changer for me. The platform is intuitive and my earnings have increased by 65% in just three months. The support team is incredibly responsive."</p>
                 </div>
                 
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card-lg" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                            JS
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-dark">Jane Smith</h4>
-                            <p class="text-sm text-gray">Digital Marketing Agency</p>
+                <div class="testimonial-card animate-fade-in-up">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">JS</div>
+                        <div class="testimonial-info">
+                            <h4>Jane Smith</h4>
+                            <div class="testimonial-role">Digital Marketing Agency</div>
                         </div>
                     </div>
-                    
-                    <div class="text-yellow-400 mb-4">
+                    <div class="testimonial-stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    
-                    <p class="text-gray italic">
-                        "The detailed analytics and comprehensive reporting have transformed how we manage affiliate campaigns for our clients. Affilink makes tracking and optimization so much easier."
-                    </p>
+                    <p class="testimonial-text">"The detailed analytics and comprehensive reporting have transformed how we manage affiliate campaigns for our clients. Affilink makes tracking and optimization so much easier."</p>
                 </div>
                 
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-2xl shadow-card p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card-lg" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 bg-gradient-to-br from-secondary to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                            MW
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-dark">Mark Wilson</h4>
-                            <p class="text-sm text-gray">E-commerce Entrepreneur</p>
+                <div class="testimonial-card animate-fade-in-up">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">MW</div>
+                        <div class="testimonial-info">
+                            <h4>Mark Wilson</h4>
+                            <div class="testimonial-role">E-commerce Entrepreneur</div>
                         </div>
                     </div>
-                    
-                    <div class="text-yellow-400 mb-4">
+                    <div class="testimonial-stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    
-                    <p class="text-gray italic">
-                        "Great support and fantastic tools. Affilink is the best affiliate platform I've worked with. It's streamlined our affiliate program management and increased our revenue significantly."
-                    </p>
+                    <p class="testimonial-text">"Great support and fantastic tools. Affilink is the best affiliate platform I've worked with. It's streamlined our affiliate program management and increased our revenue significantly."</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 md:py-20 bg-gradient-to-br from-primary to-primary-dark text-white relative overflow-hidden">
-        <!-- Background Effects -->
-        <div class="cta-bg-1 absolute -top-20 -right-20 w-80 h-80 rounded-full"></div>
-        <div class="cta-bg-2 absolute -bottom-20 -left-20 w-60 h-60 rounded-full"></div>
-        
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6" data-aos="fade-up" data-aos-duration="800">
-                Ready to Maximize Your Affiliate Earnings?
-            </h2>
-            <p class="text-lg md:text-xl text-white text-opacity-90 text-center max-w-3xl mx-auto mb-10" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                Join thousands of successful marketers who trust Affilink to grow their revenue. Start your free trial today—no credit card required.
-            </p>
-            
-            <div class="text-center" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                <a href="#" class="px-10 py-5 bg-white text-primary font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 inline-block">
-                    Start Free Trial Now
-                </a>
-            </div>
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Maximize Your Affiliate Earnings?</h2>
+            <p>Join thousands of successful marketers who trust Affilink to grow their revenue. Start your free trial today—no credit card required.</p>
+            <a href="#" class="btn btn-primary">Start Free Trial Now</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-gray-light py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                <!-- Column 1 -->
-                <div data-aos="fade-up" data-aos-duration="800">
-                    <a href="#" class="flex items-center mb-6">
-                        <img src="/images/logoAffilllink2.png" alt="Affillink Logo" class="h-10 w-auto" style="max-width:180px;">
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="#" class="logo" style="color: white; margin-bottom: 20px; display: inline-block;">
+                        <div>
+                            <img src="/images/logoAffilllink2.png" alt="Affilink Logo" style="height: 40px; width: auto; display: block;" />
+                        </div>
                     </a>
-                    <p class="text-gray-light max-w-xs">
-                        The leading affiliate marketing platform for individuals and businesses looking to maximize their revenue.
-                    </p>
+                    <p style="color: var(--gray-light); max-width: 300px;">The leading affiliate marketing platform for individuals and businesses looking to maximize their revenue.</p>
                 </div>
                 
-                <!-- Column 2 -->
-                <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                    <h3 class="text-white text-xl font-bold mb-6">Platform</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#features" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Features</a></li>
-                        <li><a href="#pricing" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Pricing</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Affiliate Programs</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">API Documentation</a></li>
+                <div class="footer-column">
+                    <h3>Platform</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Affiliate Programs</a></li>
+                        <li><a href="#">API Documentation</a></li>
                     </ul>
                 </div>
                 
-                <!-- Column 3 -->
-                <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <h3 class="text-white text-xl font-bold mb-6">Resources</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#blog" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Blog</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Help Center</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Community</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Webinars</a></li>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Webinars</a></li>
                     </ul>
                 </div>
                 
-                <!-- Column 4 -->
-                <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                    <h3 class="text-white text-xl font-bold mb-6">Company</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">About Us</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Careers</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Contact</a></li>
-                        <li><a href="#" class="text-gray-light hover:text-primary-light transition-colors hover:pl-2">Privacy Policy</a></li>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="pt-8 border-t border-white border-opacity-10 text-center">
-                <p class="text-gray text-sm">&copy; 2026 Affilink. All rights reserved.</p>
+            <div class="copyright">
+                <p>&copy; 2026 Affilink. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- AOS JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 100,
-            delay: 0,
-            disable: 'mobile'
-        });
-
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenuContainer = document.getElementById('mobileMenuContainer');
+        const navLinks = document.getElementById('navLinks');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         
         mobileMenuBtn.addEventListener('click', function() {
-            mobileMenuContainer.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('hidden');
+            navLinks.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
             
             // Ubah ikon menu
             const icon = this.querySelector('i');
-            if (mobileMenuContainer.classList.contains('active')) {
+            if (navLinks.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
             } else {
@@ -707,8 +1150,8 @@
         
         // Tutup menu saat overlay diklik
         mobileMenuOverlay.addEventListener('click', function() {
-            mobileMenuContainer.classList.remove('active');
-            this.classList.add('hidden');
+            navLinks.classList.remove('active');
+            this.classList.remove('active');
             
             // Reset ikon menu
             const icon = mobileMenuBtn.querySelector('i');
@@ -717,10 +1160,10 @@
         });
         
         // Tutup menu saat link di klik (untuk mobile)
-        document.querySelectorAll('.mobile-menu-container a').forEach(link => {
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function() {
-                mobileMenuContainer.classList.remove('active');
-                mobileMenuOverlay.classList.add('hidden');
+                navLinks.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
                 
                 // Reset ikon menu
                 const icon = mobileMenuBtn.querySelector('i');
@@ -755,27 +1198,47 @@
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('mainNav');
             if (window.scrollY > 50) {
-                nav.classList.add('navbar-scrolled');
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                nav.style.padding = '12px 0';
             } else {
-                nav.classList.remove('navbar-scrolled');
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+                nav.style.padding = '18px 0';
             }
         });
         
-        // Re-initialize AOS saat ukuran window berubah
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements to animate
+            document.querySelectorAll('.feature-card, .testimonial-card, .analytics-content, .analytics-preview').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Responsive adjustments on window resize
         window.addEventListener('resize', function() {
-            // Jika ukuran layar lebih besar dari 1024px, pastikan menu mobile tertutup
-            if (window.innerWidth > 1024) {
-                mobileMenuContainer.classList.remove('active');
-                mobileMenuOverlay.classList.add('hidden');
+            // Jika ukuran layar lebih besar dari 768px, pastikan menu desktop tampil normal
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
                 
                 // Reset ikon menu
                 const icon = mobileMenuBtn.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
-            
-            // Refresh AOS
-            AOS.refresh();
         });
     </script>
 </body>
