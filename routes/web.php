@@ -13,6 +13,9 @@ Route::get('/', function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('auth.register');
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->name('auth.forgot');
 });
 
 // Dashboard (Public route - JavaScript will handle auth verification)

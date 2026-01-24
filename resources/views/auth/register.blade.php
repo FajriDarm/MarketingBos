@@ -20,6 +20,18 @@
         .glass-effect {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .input-focus:focus {
@@ -29,16 +41,34 @@
 
         .btn-primary {
             background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: bounceIn 0.8s 0.2s both;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            80% {
+                transform: scale(0.97);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.04) rotate(-1deg);
             box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
         }
 
         .btn-primary:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(0.98);
         }
 
         .eye-icon {
@@ -210,7 +240,7 @@
 
         <!-- Footer -->
         <p class="text-center text-gray-300 text-xs mt-8">
-            © 2024 Affillink. All rights reserved.
+            © 2026 Affillink. All rights reserved.
         </p>
     </div>
 
