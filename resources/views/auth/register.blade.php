@@ -244,12 +244,70 @@
         </p>
     </div>
 
+    <style>
+        .modal-success {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem 2rem 2rem;
+            box-shadow: 0 10px 40px rgba(76,175,80,0.15);
+            text-align: center;
+            min-width: 320px;
+            animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .checkmark {
+            width: 70px;
+            height: 70px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        .checkmark__circle {
+            stroke: #10b981;
+            stroke-width: 5;
+            fill: none;
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: strokeCircle 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        .checkmark__check {
+            stroke: #10b981;
+            stroke-width: 5;
+            fill: none;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: strokeCheck 0.4s 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        @keyframes strokeCircle {
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes strokeCheck {
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+    <div id="modalSuccess" class="modal-success" style="display:none;">
+        <div class="modal-content">
+            <svg class="checkmark" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25"/>
+                <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+            </svg>
+            <h2 class="text-2xl font-bold text-green-600 mb-2">Registrasi Berhasil!</h2>
+            <p class="text-gray-600 mb-4">Akun Anda berhasil dibuat.<br>Silakan login dengan akun Anda.</p>
+            <button id="goToLoginBtn" class="btn-primary w-full py-2 rounded-lg text-white font-semibold text-base mt-2 transition">Ke Halaman Login</button>
+        </div>
+    </div>
     <script>
         const togglePassword = (fieldId) => {
             const passwordInput = document.getElementById(fieldId);
             const eyeIconClass = fieldId === 'password' ? '.toggle-eye-icon-1' : '.toggle-eye-icon-2';
             const toggleEyeIcon = document.querySelector(eyeIconClass);
-            
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleEyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
@@ -264,15 +322,11 @@
             const password = e.target.value;
             const strengthBar = document.getElementById('strengthBar');
             let strength = 0;
-
-            // Check password strength
             if (password.length >= 8) strength += 1;
             if (password.match(/[a-z]+/)) strength += 1;
             if (password.match(/[A-Z]+/)) strength += 1;
             if (password.match(/[0-9]+/)) strength += 1;
             if (password.match(/[\W_]+/)) strength += 1;
-
-            // Update strength bar
             strengthBar.className = 'password-strength-bar transition-all';
             if (strength <= 2) {
                 strengthBar.classList.add('strength-weak');
@@ -281,34 +335,26 @@
             } else {
                 strengthBar.classList.add('strength-strong');
             }
-
-            // Clear error
             document.querySelector('.error-password').classList.add('hidden');
         });
 
         // Handle form submission
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // Clear all previous errors
             document.querySelectorAll('[class*="error-"]').forEach(el => {
                 el.classList.add('hidden');
             });
-            
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value,
                 password_confirmation: document.getElementById('password_confirmation').value,
             };
-
-            // Validate password match
             if (formData.password !== formData.password_confirmation) {
                 document.querySelector('.error-password_confirmation').textContent = 'Passwords do not match';
                 document.querySelector('.error-password_confirmation').classList.remove('hidden');
                 return;
             }
-
             try {
                 const response = await fetch('/api/auth/register', {
                     method: 'POST',
@@ -318,17 +364,14 @@
                     },
                     body: JSON.stringify(formData)
                 });
-
                 const data = await response.json();
-
                 if (response.ok) {
-                    // Show success message
-                    alert('Registration successful! Please login with your credentials.');
-                    
-                    // Redirect to login page
-                    window.location.href = '/login';
+                    // Show modal success
+                    document.getElementById('modalSuccess').style.display = 'flex';
+                    document.getElementById('goToLoginBtn').onclick = function() {
+                        window.location.href = '/login';
+                    };
                 } else {
-                    // Show errors
                     if (data.errors) {
                         Object.keys(data.errors).forEach(field => {
                             const errorElement = document.querySelector(`.error-${field}`);
@@ -348,15 +391,12 @@
             }
         });
 
-        // Clear error messages when user starts typing
         document.getElementById('name').addEventListener('input', () => {
             document.querySelector('.error-name').classList.add('hidden');
         });
-
         document.getElementById('email').addEventListener('input', () => {
             document.querySelector('.error-email').classList.add('hidden');
         });
-
         document.getElementById('password_confirmation').addEventListener('input', () => {
             document.querySelector('.error-password_confirmation').classList.add('hidden');
         });

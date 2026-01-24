@@ -772,6 +772,7 @@
                 const icon = mobileMenuBtn.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
+                
             }
             
             // Refresh AOS
